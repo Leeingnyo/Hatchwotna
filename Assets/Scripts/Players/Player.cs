@@ -4,6 +4,7 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
     public int state;
+    public int playerNumber = 1;
     public Animator animation;
 
     // Use this for initialization

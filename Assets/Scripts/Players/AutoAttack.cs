@@ -21,7 +21,9 @@ public class AutoAttack : MonoBehaviour {
             restTic += Time.deltaTime;
             if (restTic > autoAttackCooltime)
             {
-                //TODO auto-attack must be activated
+                FindObjectOfType<MainLogic>().DamageHp(damage, player.playerNumber);
+                //FIXME 데미지 계산
+                //TODO Effect is required
                 Debug.Log((player.transform.position.x < 0 ? "플레이어1" : "플레이어2") + " 자동 공격");
                 count++;
                 restTic = 0;

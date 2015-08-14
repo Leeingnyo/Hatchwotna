@@ -159,7 +159,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
-  m_StereoMirrorMode: 0
 --- !u!4 &11311047
 Transform:
   m_ObjectHideFlags: 0
@@ -172,11 +171,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!1 &337577541 stripped
+--- !u!1 &337577541
 GameObject:
   m_PrefabParentObject: {fileID: 127280, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_PrefabInternal: {fileID: 1146456394}
---- !u!1 &488930352 stripped
+--- !u!1 &488930352
 GameObject:
   m_PrefabParentObject: {fileID: 174554, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_PrefabInternal: {fileID: 1146456394}
@@ -361,15 +360,15 @@ MonoBehaviour:
   ask2: {fileID: 958634092}
   timerSum: 0
   hatchWotnaState: 0
---- !u!1 &816012804 stripped
+--- !u!1 &816012804
 GameObject:
   m_PrefabParentObject: {fileID: 149492, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_PrefabInternal: {fileID: 1146456394}
---- !u!1 &925782529 stripped
+--- !u!1 &925782529
 GameObject:
   m_PrefabParentObject: {fileID: 164748, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_PrefabInternal: {fileID: 1146456394}
---- !u!1 &958634092 stripped
+--- !u!1 &958634092
 GameObject:
   m_PrefabParentObject: {fileID: 123820, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_PrefabInternal: {fileID: 1146456394}
@@ -569,7 +568,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ff0f3ff8bcc29246a066598490d3000, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1672246149 stripped
+--- !u!1 &1672246149
 GameObject:
   m_PrefabParentObject: {fileID: 145698, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_PrefabInternal: {fileID: 1146456394}
@@ -619,7 +618,6 @@ MonoBehaviour:
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
-  m_RepeatDelay: .5
   m_AllowActivationOnMobileDevice: 0
 --- !u!114 &1720764913
 MonoBehaviour:
@@ -647,7 +645,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
---- !u!1 &1815046176 stripped
+--- !u!1 &1815046176
 GameObject:
   m_PrefabParentObject: {fileID: 135692, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_PrefabInternal: {fileID: 1146456394}

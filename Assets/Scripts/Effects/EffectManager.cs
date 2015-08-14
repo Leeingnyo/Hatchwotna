@@ -8,6 +8,7 @@ public class EffectManager : MonoBehaviour {
 
     public float elapsedTime;
     // public GameMaster gm;
+    public MainLogic mainLogic;
     
     public float bossX, bossY;
     public float radiusX, radiusY;
@@ -23,9 +24,9 @@ public class EffectManager : MonoBehaviour {
 		radiusY = 1.2f;
         durationMultiplier = 0.1f;
 
-		elapsedTime = 60.0f; // Temp
+		elapsedTime = 6.0f; // Temp
 
-		//StartCoroutine ("EffectRotation");
+		// StartCoroutine ("EffectRotation");
 	}
 	
 	// Update is called once per frame
@@ -87,6 +88,7 @@ public class EffectManager : MonoBehaviour {
         }
         effect.GetComponent<Renderer>().material.color = Color.Lerp(colorStart, colorEnd, 1);
         yield return null;
+        Destroy(effect);
     }
 
 	// For Test

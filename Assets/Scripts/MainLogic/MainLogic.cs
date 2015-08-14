@@ -35,7 +35,7 @@ public class MainLogic : MonoBehaviour {
 	void BossHpUpdate(){
 		if (bossHp>=0) hpgreen.transform.localScale = new Vector3 ((float)(bossHp)/(float)(bossMaxHp), 1, 1); //HP 게이지바 크기 설정
 		else hpgreen.transform.localScale = new Vector3 (0, 1, 1); //HP 게이지바 크기 설정
-		dmgtext.text = "보스 남은체력 (프레임당 5씩 닳게 설정함)" + Convert.ToString (bossHp);
+		dmgtext.text = "보스 남은체력 (프레임당 5씩 닳게 설정함)" + Convert.ToString (bossHp)+" 타이머 : "+Convert.ToString (timer);
 	}
 
 	void Ending(int hero){
@@ -123,7 +123,7 @@ public class MainLogic : MonoBehaviour {
 		} 
 		else if (timer == 0) {
 			countdown.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
-			//Hatchwotna(); //해치웠나? 함수 호출
+			Hatchwotna(); //해치웠나? 함수 호출
 		}
 	}
 }

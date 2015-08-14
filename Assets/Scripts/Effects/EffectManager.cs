@@ -25,7 +25,7 @@ public class EffectManager : MonoBehaviour {
 
 		elapsedTime = 60.0f; // Temp
 
-		StartCoroutine ("EffectRotation");
+		//StartCoroutine ("EffectRotation");
 	}
 	
 	// Update is called once per frame

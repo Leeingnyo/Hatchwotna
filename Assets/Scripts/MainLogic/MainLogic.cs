@@ -60,7 +60,7 @@ public class MainLogic : MonoBehaviour {
 		BossHpUpdate(); //보스 HP띄우는 UI 갱신
 		if (bossHp < 0) { //보스 체력이 0이 되어 강제종료
 			hatchWotnaState = true; //공격 못하게 막음
-			System.Threading.Thread.Sleep(3000); //3초 대기
+			//System.Threading.Thread.Sleep(3000); //3초 대기
 			if (damageSum1 < damageSum2) { //2플레이어가 누적 딜 높음
 				winner=1; //1플레이어 승리
 			} 
@@ -80,7 +80,7 @@ public class MainLogic : MonoBehaviour {
 		else { //2플레이어가 해치웠나? 물어봄
 			ask2.transform.position = new Vector3 (0, 0, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
 		}
-		System.Threading.Thread.Sleep(3000); //3초 대기
+		//System.Threading.Thread.Sleep(3000); //3초 대기
 		if (bossHp <= bossKillHP){ //보스 체력이 해치웠나? 할때 죽는 체력 이하일 때
 			if (damage1 < damage2) { //1플레이어가 해치웠나? 물어봄
 				winner=2; //2플레이어 승리
@@ -115,7 +115,6 @@ public class MainLogic : MonoBehaviour {
 		if (timer>0){
 			timer--; //프레임마다 타이머 감소
 			timerSum++; //프레임마다 누적 타이머 증가
-			DamageHp(5, 1);
 		}
 
 		if (timer == count3) {

@@ -52,6 +52,7 @@ public class SkillActivator : MonoBehaviour {
                 tic = 0;
                 isSkillActivated = false;
                 player.SetState((int)PlayerState.Normal);
+                player.animation.SetInteger("State", (int)PlayerState.Normal);
             }
         }
     }
@@ -60,5 +61,6 @@ public class SkillActivator : MonoBehaviour {
     {
         isSkillActivated = true;
         player.SetState((int)PlayerState.Attack);
+        player.animation.SetInteger("State", (int)PlayerState.Attack);
     }
 }

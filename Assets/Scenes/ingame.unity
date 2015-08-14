@@ -199,3 +199,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!1 &1215105356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1215105358}
+  - 114: {fileID: 1215105357}
+  m_Layer: 0
+  m_Name: EffectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1215105357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1215105356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711e0b49ae95c5e41a421117936c63a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionEffect:
+  - {fileID: 153540, guid: 06a36cb425ced314eb7656236c9848e6, type: 2}
+  - {fileID: 121652, guid: 238c3d97efe5c3245b992f089de2f87c, type: 2}
+  - {fileID: 129400, guid: f31bde4a575b1be4c83164dc3f489582, type: 2}
+  - {fileID: 195628, guid: 60215823ab034034dae8b0315deb76dc, type: 2}
+  smokeEffect: {fileID: 0}
+  elapsedTime: 0
+  bossX: 0
+  bossY: 0
+  radiusX: 0
+  radiusY: 0
+  durationMultiplier: 0
+--- !u!4 &1215105358
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1215105356}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2

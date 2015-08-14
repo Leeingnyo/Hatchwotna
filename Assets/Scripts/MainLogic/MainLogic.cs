@@ -35,6 +35,7 @@ public class MainLogic : MonoBehaviour {
 	int timerMinRange=200; //해치웠나 타이머 설정시 최소 시간
 	int timerMaxRange=301; //해치웠나 타이머 설정시 최대 시간
 	public bool hatchWotnaState=false; //해치웠나 상태 false로 초기화
+	int hatchWotnaTimer=0; //해치웠나 타이머 설정시 최대 시간
 
 	void BossHpUpdate(){
 		if (bossHp>=0) hpgreen.transform.localScale = new Vector3 ((float)(bossHp)/(float)(bossMaxHp), 1, 1); //HP 게이지바 크기 설정
@@ -60,14 +61,8 @@ public class MainLogic : MonoBehaviour {
 		BossHpUpdate(); //보스 HP띄우는 UI 갱신
 		if (bossHp < 0) { //보스 체력이 0이 되어 강제종료
 			hatchWotnaState = true; //공격 못하게 막음
+			hatchWotnaTimer=150;
 			//System.Threading.Thread.Sleep(3000); //3초 대기
-			if (damageSum1 < damageSum2) { //2플레이어가 누적 딜 높음
-				winner=1; //1플레이어 승리
-			} 
-			else { //1플레이어가 누적 딜 높음
-				winner=2; //2플레이어 승리
-			}
-			Ending(winner); //엔딩 호출
 		}
 	}
 
@@ -80,22 +75,8 @@ public class MainLogic : MonoBehaviour {
 		else { //2플레이어가 해치웠나? 물어봄
 			ask2.transform.position = new Vector3 (0, 0, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
 		}
+		hatchWotnaTimer=150;
 		//System.Threading.Thread.Sleep(3000); //3초 대기
-		if (bossHp <= bossKillHP){ //보스 체력이 해치웠나? 할때 죽는 체력 이하일 때
-			if (damage1 < damage2) { //1플레이어가 해치웠나? 물어봄
-				winner=2; //2플레이어 승리
-			} 
-			else { //2플레이어가 해치웠나? 물어봄
-				winner=1; //1플레이어 승리
-			}
-			Ending(winner); //엔딩 호출
-		}
-		timer=UnityEngine.Random.Range(timerMinRange, timerMaxRange); //다음 해치웠나? 타이머 시간 설정
-		damage1 = 0; //1플레이어-이번 페이즈에 누적된 피해량 초기화
-		damage2 = 0; //2플레이어-이번 페이즈에 누적된 피해량 초기화
-		ask1.transform.position = new Vector3 (-5000, -5000, 0); //해치웠나? 이미지 지우기 (안보이는곳으로 보냄)
-		ask2.transform.position = new Vector3 (-5000, -5000, 0); //해치웠나? 이미지 지우기 (안보이는곳으로 보냄)
-		hatchWotnaState = false; //공격 가능하게 품
 	}
 
 	// Use this for initialization
@@ -128,9 +109,42 @@ public class MainLogic : MonoBehaviour {
 			countdown2.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
 			countdown1.transform.position = new Vector3 (0, 0, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
 		} 
-		else if (timer == 0) {
+		else if (timer == 0 && hatchWotnaState == false) {
 			countdown1.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
 			Hatchwotna(); //해치웠나? 함수 호출
+		}
+
+		if (hatchWotnaState == true) {
+			if (hatchWotnaTimer>0) hatchWotnaTimer--;
+			else if (hatchWotnaTimer==0){
+				if (bossHp < 0) { //보스 체력이 0이 되어 강제종료
+					if (damageSum1 < damageSum2) { //2플레이어가 누적 딜 높음
+						winner=1; //1플레이어 승리
+					} 
+					else { //1플레이어가 누적 딜 높음
+						winner=2; //2플레이어 승리
+					}
+					Ending(winner); //엔딩 호출
+				}
+				else{
+					if (bossHp <= bossKillHP){ //보스 체력이 해치웠나? 할때 죽는 체력 이하일 때
+						if (damage1 < damage2) { //1플레이어가 해치웠나? 물어봄
+							winner=2; //2플레이어 승리
+						} 
+						else { //2플레이어가 해치웠나? 물어봄
+							winner=1; //1플레이어 승리
+						}
+						Ending(winner); //엔딩 호출
+					}
+					timer=UnityEngine.Random.Range(timerMinRange, timerMaxRange); //다음 해치웠나? 타이머 시간 설정
+					damage1 = 0; //1플레이어-이번 페이즈에 누적된 피해량 초기화
+					damage2 = 0; //2플레이어-이번 페이즈에 누적된 피해량 초기화
+					ask1.transform.position = new Vector3 (-5000, -5000, 0); //해치웠나? 이미지 지우기 (안보이는곳으로 보냄)
+					ask2.transform.position = new Vector3 (-5000, -5000, 0); //해치웠나? 이미지 지우기 (안보이는곳으로 보냄)
+					hatchWotnaState = false; //공격 가능하게 품
+				}
+
+			}
 		}
 	}
 }

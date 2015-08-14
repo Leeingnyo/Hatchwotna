@@ -6,10 +6,13 @@ using UnityEngine.UI;
 
 public class MainLogic : MonoBehaviour {
 	public Text dmgtext;
-	public GameObject countdown; //3 2 1 세는 카운트 이미지
+	public GameObject countdown3; //3 2 1 세는 카운트 이미지
+	public GameObject countdown2; //3 2 1 세는 카운트 이미지
+	public GameObject countdown1; //3 2 1 세는 카운트 이미지
 	public GameObject hpgauge; //HP 게이지바의 고정된 부분
 	public GameObject hpgreen; //HP 게이지바의 줄어드는 초록색 부분
-	public GameObject ask; //해치웠나? 하고 물어보는 말풍선
+	public GameObject ask1; //해치웠나? 하고 물어보는 말풍선
+	public GameObject ask2; //해치웠나? 하고 물어보는 말풍선
 
 	int damageSum1; //1플레이어-전체 게임에서 누적된 피해량
 	int damage1; //1플레이어-이번 페이즈에 누적된 피해량
@@ -31,6 +34,7 @@ public class MainLogic : MonoBehaviour {
 
 	int timerMinRange=200; //해치웠나 타이머 설정시 최소 시간
 	int timerMaxRange=301; //해치웠나 타이머 설정시 최대 시간
+	public bool hatchWotnaState=false; //해치웠나 상태 false로 초기화
 
 	void BossHpUpdate(){
 		if (bossHp>=0) hpgreen.transform.localScale = new Vector3 ((float)(bossHp)/(float)(bossMaxHp), 1, 1); //HP 게이지바 크기 설정
@@ -55,6 +59,7 @@ public class MainLogic : MonoBehaviour {
 		bossHp = bossHp - n; //보스 HP 감소
 		BossHpUpdate(); //보스 HP띄우는 UI 갱신
 		if (bossHp < 0) { //보스 체력이 0이 되어 강제종료
+			hatchWotnaState = true; //공격 못하게 막음
 			System.Threading.Thread.Sleep(3000); //3초 대기
 			if (damageSum1 < damageSum2) { //2플레이어가 누적 딜 높음
 				winner=1; //1플레이어 승리
@@ -67,14 +72,13 @@ public class MainLogic : MonoBehaviour {
 	}
 
 	void Hatchwotna(){
+		hatchWotnaState = true; //공격 못하게 막음
 		//캐릭터 자세 변경하는거 호출할것
 		if (damage1 < damage2) { //1플레이어가 해치웠나? 물어봄
-			ask.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Interface/ask1"); //플레이어 1을 향하는 말풍선 (경로는 나중에 이미지에 맞게 수정할 것)
-			ask.transform.position = new Vector3 (0, 0, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
+			ask1.transform.position = new Vector3 (0, 0, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
 		} 
 		else { //2플레이어가 해치웠나? 물어봄
-			ask.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Interface/ask2"); //플레이어 2를 향하는 말풍선 (경로는 나중에 이미지에 맞게 수정할 것)
-			ask.transform.position = new Vector3 (0, 0, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
+			ask2.transform.position = new Vector3 (0, 0, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
 		}
 		System.Threading.Thread.Sleep(3000); //3초 대기
 		if (bossHp <= bossKillHP){ //보스 체력이 해치웠나? 할때 죽는 체력 이하일 때
@@ -89,6 +93,9 @@ public class MainLogic : MonoBehaviour {
 		timer=UnityEngine.Random.Range(timerMinRange, timerMaxRange); //다음 해치웠나? 타이머 시간 설정
 		damage1 = 0; //1플레이어-이번 페이즈에 누적된 피해량 초기화
 		damage2 = 0; //2플레이어-이번 페이즈에 누적된 피해량 초기화
+		ask1.transform.position = new Vector3 (-5000, -5000, 0); //해치웠나? 이미지 지우기 (안보이는곳으로 보냄)
+		ask2.transform.position = new Vector3 (-5000, -5000, 0); //해치웠나? 이미지 지우기 (안보이는곳으로 보냄)
+		hatchWotnaState = false; //공격 가능하게 품
 	}
 
 	// Use this for initialization
@@ -112,17 +119,18 @@ public class MainLogic : MonoBehaviour {
 		}
 
 		if (timer == count3) {
-			countdown.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Interface/count3"); //카운트 이미지 3으로 변경 (경로는 나중에 이미지에 맞게 수정할 것)
-			countdown.transform.position = new Vector3 (0, 0, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
+			countdown3.transform.position = new Vector3 (0, 0, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
 		} 
 		else if (timer == count2) {
-			countdown.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Interface/count2"); //카운트 이미지 2로 변경 (경로는 나중에 이미지에 맞게 수정할 것)
+			countdown3.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
+			countdown2.transform.position = new Vector3 (0, 0, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
 		} 
 		else if (timer == count1) {
-			countdown.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Interface/count1"); //카운트 이미지 1로 변경 (경로는 나중에 이미지에 맞게 수정할 것)
+			countdown2.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
+			countdown1.transform.position = new Vector3 (0, 0, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
 		} 
 		else if (timer == 0) {
-			countdown.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
+			countdown1.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
 			Hatchwotna(); //해치웠나? 함수 호출
 		}
 	}

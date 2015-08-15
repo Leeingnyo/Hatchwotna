@@ -16,6 +16,8 @@ public class MainLogic : MonoBehaviour {
 	public GameObject hpgreen; //HP 게이지바의 줄어드는 초록색 부분
 	public GameObject ask1; //해치웠나? 하고 물어보는 말풍선
 	public GameObject ask2; //해치웠나? 하고 물어보는 말풍선
+	public GameObject demon; //HP 게이지바의 고정된 부분
+	public GameObject demonAngry; //HP 게이지바의 고정된 부분
 
 	int damageSum1; //1플레이어-전체 게임에서 누적된 피해량
 	int damage1; //1플레이어-이번 페이즈에 누적된 피해량
@@ -38,10 +40,11 @@ public class MainLogic : MonoBehaviour {
 	float count1=1f; //1 하는 이미지가 튀어나오는 시간
 	int countstate=4;
 
-	int timerMinRange=700; //해치웠나 타이머 설정시 최소 시간
-	int timerMaxRange=1001; //해치웠나 타이머 설정시 최대 시간
+	int timerMinRange=1400; //해치웠나 타이머 설정시 최소 시간
+	int timerMaxRange=2001; //해치웠나 타이머 설정시 최대 시간
 	public bool hatchWotnaState=false; //해치웠나 상태 false로 초기화
 	float hatchWotnaTimer=0; //해치웠나 대기 타이머
+	float demonTimer=0; //마왕 공격 및 회복 타이머
 
 	void BossHpUpdate(){
 		if ((float)(bossHp) / (float)(bossMaxHp) > 0.5f) {
@@ -99,6 +102,7 @@ public class MainLogic : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		demon.transform.position = new Vector3 (0, 0.6f, 0); //악마 이미지 위치 설정
 		timerSum = 0; //누적 타이머 초기화
 		damageSum1 = 0; //누적 피해 초기화1
 		damage1 = 0; //현재 피해 초기화1
@@ -113,6 +117,16 @@ public class MainLogic : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (demonTimer>0){
+			demonTimer=demonTimer-Time.deltaTime; //프레임마다 타이머 감소
+			bossHp=bossHp+Convert.ToInt32(Time.deltaTime*300.0f);
+			if (bossHp>bossMaxHp) bossHp=bossMaxHp;
+			BossHpUpdate(); //보스 HP띄우는 UI 갱신
+			if (demonTimer<=0){
+				demon.transform.position = new Vector3 (0, 0.6f, 0); //악마 이미지 위치 설정
+				demonAngry.transform.position = new Vector3 (-5000, -5000, 0); //악마 이미지 위치 설정
+			}
+		}
 		if (timer>0){
 			timer=timer-Time.deltaTime; //프레임마다 타이머 감소
 			timerSum=timerSum+Time.deltaTime; //프레임마다 누적 타이머 증가
@@ -164,6 +178,9 @@ public class MainLogic : MonoBehaviour {
 						}
 						Ending(winner); //엔딩 호출
 					}
+					demon.transform.position = new Vector3 (-5000, -5000, 0); //악마 이미지 위치 설정
+					demonAngry.transform.position = new Vector3 (0, 0.7f, 0); //악마 이미지 위치 설정
+					demonTimer=2f;
 					timer=(float)(UnityEngine.Random.Range(timerMinRange, timerMaxRange))/100f;
 					damage1 = 0; //1플레이어-이번 페이즈에 누적된 피해량 초기화
 					damage2 = 0; //2플레이어-이번 페이즈에 누적된 피해량 초기화

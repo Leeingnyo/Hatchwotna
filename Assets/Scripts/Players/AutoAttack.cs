@@ -16,7 +16,7 @@ public class AutoAttack : MonoBehaviour {
 	
     // Update is called once per frame
     void Update () {
-        if (player.IsRest())
+        if (!player.mainlogic.hatchWotnaState && player.IsRest())
         {
             restTic += Time.deltaTime;
             if (restTic > autoAttackCooltime)

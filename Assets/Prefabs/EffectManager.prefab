@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &107906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 450694}
+  m_Layer: 0
+  m_Name: SmokeParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &115200
 GameObject:
   m_ObjectHideFlags: 0
@@ -16,6 +31,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &450694
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107906}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .217420936, y: -.362108231, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 451252}
+  m_RootOrder: 0
 --- !u!4 &451252
 Transform:
   m_ObjectHideFlags: 1
@@ -25,7 +52,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 450694}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!114 &11480098
@@ -51,14 +79,13 @@ MonoBehaviour:
   - {fileID: 157392, guid: 9b19bae0052bcee409cd5e2000af79cc, type: 2}
   - {fileID: 179490, guid: 8ea529a101b2e0c41b9526b11ca5de8d, type: 2}
   - {fileID: 183816, guid: 01da1104e1c56a44aa36dc754dbe1ef0, type: 2}
-  smokeParent: {fileID: 0}
+  smokeParent: {fileID: 107906}
   mainLogic: {fileID: 0}
   bossX: 0
-  bossY: 0
-  radiusX: 0
-  radiusY: 0
-  durationMultiplier: 0
-  smokeRegenNum: 60
+  bossY: 1
+  radiusX: 2.5
+  radiusY: 1.60000002
+  smokeRegenNum: 35
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

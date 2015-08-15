@@ -8,6 +8,9 @@ public class EffectManager : MonoBehaviour {
     public GameObject[] explosionEffectP2;
     public GameObject[] smokeEffect;
 
+    public GameObject[] p1NumPF;
+    public GameObject[] p2NumPF;
+
     public GameObject smokeParent;
 
     // public float elapsedTime;
@@ -16,6 +19,8 @@ public class EffectManager : MonoBehaviour {
     public float bossX, bossY;
     public float radiusX, radiusY;
     // public float smokeAlphaMultiplier;
+
+    public float p1DmgPos, p2DmgPos;
 
     public int smokeRegenNum;
 
@@ -194,4 +199,51 @@ public class EffectManager : MonoBehaviour {
 			yield return new WaitForSeconds(0.5f);
 		}
 	}
+
+    // 주의: 끝자리부터 출력한다.
+    public void FakeDamageEffect(int damage, int player)
+    {
+        GameObject[] numberPf = (player == 1) ? p1NumPF : p2NumPF;
+
+        float posX = (player == 1) ? -1.0f : 2.5f;
+        float posY = 1.5f;
+
+        posX += Random.Range(-0.175f, 0.175f);
+
+        do
+        {
+            int currentDigit = damage % 10;
+
+            GameObject number = (GameObject)Instantiate(numberPf[currentDigit], new Vector3(posX, posY, 0f), Quaternion.identity);
+            Debug.Log("Number Instantiate : " + damage);
+            StartCoroutine(DamageFloating(number));
+
+            damage /= 10;
+            posX -= 0.5f;
+        }
+        while (damage > 0);
+    }
+
+    IEnumerator DamageFloating(GameObject number)
+    {
+        float speed = 0.07f;
+        float alphaSpeed = 0.03f;
+
+        // FIXME alpha > 0 으로 바꾸는게 더 좋은가?
+        while(number.transform.position.y < 4.0f)
+        {
+            Vector3 v = number.transform.position;
+            v.y += speed;
+            number.transform.position = v;
+
+            Color c = number.GetComponent<Renderer>().material.color;
+            number.GetComponent<Renderer>().material.color = new Color(c.r, c.g, c.b, c.a - alphaSpeed);
+
+            yield return null;
+        }
+
+        Destroy(number);
+        yield return null;
+    }
+
 }

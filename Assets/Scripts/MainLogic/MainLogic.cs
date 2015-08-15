@@ -78,6 +78,8 @@ public class MainLogic : MonoBehaviour {
 	public void DamageHp(int n, int atk){
 		lastAttack = atk; //마지막으로 공격한 플레이어 설정
 		fakeDmg=UnityEngine.Random.Range(n*1000+100, n*1000+1000); //다음 해치웠나? 타이머 시간 설정
+        FindObjectOfType<EffectManager>().FakeDamageEffect(fakeDmg, atk);
+        /*
 		dmgx = 0.8f;
 		dmgy = 1.5f;
 		if (atk==1) GameObject.Instantiate(number1[fakeDmg%10], new Vector3(dmgx, dmgy, 0), Quaternion.identity);
@@ -102,6 +104,7 @@ public class MainLogic : MonoBehaviour {
 			else
 				GameObject.Instantiate (number2 [fakeDmg % 10], new Vector3 (dmgx, dmgy, 0), Quaternion.identity);
 		}
+         */
 		if (atk == 1) { //공격 플레이어가 1일때
 			damageSum1=damageSum1+n; //1플레이어 전체 피해 누적
 			damage1=damage1+n; //1플레이어 이번 페이즈 피해 누적

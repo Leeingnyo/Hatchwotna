@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 
 public class MainLogic : MonoBehaviour {
+	AudioSource sound;
+
 	public Text dmgtext;
 	public GameObject countdown31; //3 2 1 세는 카운트 이미지
 	public GameObject countdown21; //3 2 1 세는 카운트 이미지
@@ -100,10 +102,14 @@ public class MainLogic : MonoBehaviour {
 		if (damage1 < damage2) { //1플레이어가 해치웠나? 물어봄
             targetPlayerNumber = 1;
 			ask1.transform.position = new Vector3 (0, -3.5f, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
+			sound=ask1.GetComponent<AudioSource>();
+			sound.Play();
 		} 
 		else { //2플레이어가 해치웠나? 물어봄
             targetPlayerNumber = 2;
 			ask2.transform.position = new Vector3 (0, -3.5f, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
+			sound=ask2.GetComponent<AudioSource>();
+			sound.Play();
 		}
 		hatchWotnaTimer=3f;
 		if (bossHp <= bossKillHP){ //보스 체력이 해치웠나? 할때 죽는 체력 이하일 때
@@ -195,6 +201,8 @@ public class MainLogic : MonoBehaviour {
 					else{
 						demon.transform.position = new Vector3 (-5000, -5000, 0); //악마 이미지 위치 설정
 						demonAngry.transform.position = new Vector3 (0, 0.3f, 0); //악마 이미지 위치 설정
+						sound=demonAngry.GetComponent<AudioSource>();
+						sound.Play();
 						demonTimer=2f;
 						timer=(float)(UnityEngine.Random.Range(timerMinRange, timerMaxRange))/100f;
 						damage1 = 0; //1플레이어-이번 페이즈에 누적된 피해량 초기화

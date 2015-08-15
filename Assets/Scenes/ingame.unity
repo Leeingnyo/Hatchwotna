@@ -716,7 +716,7 @@ MonoBehaviour:
   hpgauge: {fileID: 488930352}
   hpgreen: {fileID: 816012804}
   ask1: {fileID: 1815046176}
-  ask2: {fileID: 0}
+  ask2: {fileID: 2031299489}
   demon: {fileID: 1576577423}
   demonAngry: {fileID: 1997790130}
   targetPlayerNumber: 0
@@ -2241,6 +2241,10 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2031239197}
+--- !u!1 &2031299489 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 123820, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
+  m_PrefabInternal: {fileID: 1146456394}
 --- !u!4 &2069106874 stripped
 Transform:
   m_PrefabParentObject: {fileID: 451252, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}

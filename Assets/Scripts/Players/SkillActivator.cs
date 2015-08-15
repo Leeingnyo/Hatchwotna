@@ -28,28 +28,28 @@ public class SkillActivator : MonoBehaviour {
                 BaseAttack();
                 Debug.Log((player.transform.position.x < 0 ? "플레이어1" : "플레이어2") + " 스킬 1 발동");
                 FindObjectOfType<MainLogic>().DamageHp(2, player.playerNumber);
-                FindObjectOfType<EffectManager>().EffectGen(1);
+                FindObjectOfType<EffectManager>().EffectGen(player.playerNumber * 10 + 1);
             }
             else if (Input.GetKey(skill02))
             {
                 BaseAttack();
                 Debug.Log((player.transform.position.x < 0 ? "플레이어1" : "플레이어2") + " 스킬 2 발동");
                 FindObjectOfType<MainLogic>().DamageHp(3, player.playerNumber);
-                FindObjectOfType<EffectManager>().EffectGen(2);
+                FindObjectOfType<EffectManager>().EffectGen(player.playerNumber * 10 + 2);
             }
             else if (Input.GetKey(skill03))
             {
                 BaseAttack();
                 Debug.Log((player.transform.position.x < 0 ? "플레이어1" : "플레이어2") + " 스킬 3 발동");
                 FindObjectOfType<MainLogic>().DamageHp(6, player.playerNumber);
-                FindObjectOfType<EffectManager>().EffectGen(3);
+                FindObjectOfType<EffectManager>().EffectGen(player.playerNumber * 10 + 3);
             }
             else if (Input.GetKey(skill04))
             {
                 BaseAttack();
                 Debug.Log((player.transform.position.x < 0 ? "플레이어1" : "플레이어2") + " 스킬 4 발동");
                 FindObjectOfType<MainLogic>().DamageHp(10, player.playerNumber);
-                FindObjectOfType<EffectManager>().EffectGen(4);
+                FindObjectOfType<EffectManager>().EffectGen(player.playerNumber * 10 + 4);
             }
         }
         else if (isSkillActivated)

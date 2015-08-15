@@ -39,17 +39,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 711e0b49ae95c5e41a421117936c63a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionEffect:
-  - {fileID: 153540, guid: 06a36cb425ced314eb7656236c9848e6, type: 2}
-  - {fileID: 121652, guid: 238c3d97efe5c3245b992f089de2f87c, type: 2}
-  - {fileID: 129400, guid: f31bde4a575b1be4c83164dc3f489582, type: 2}
-  - {fileID: 195628, guid: 60215823ab034034dae8b0315deb76dc, type: 2}
-  elapsedTime: 0
+  explosionEffectP1:
+  - {fileID: 122334, guid: 4ea92c4b7b6d49a4dab6266a1b7a2332, type: 2}
+  - {fileID: 199672, guid: 29afce1f2ca43944c8be4fc5a1b434eb, type: 2}
+  - {fileID: 159188, guid: 9232d9c5a006b304698c713b0e9c55ca, type: 2}
+  explosionEffectP2:
+  - {fileID: 155850, guid: bf604d7dca140cd4aaf1b3cae1872bdb, type: 2}
+  - {fileID: 175566, guid: fe3d880c0a4d60c44963a3174ca4242c, type: 2}
+  - {fileID: 150722, guid: a0ff49da8d04093488b5ea2b39ce53a3, type: 2}
+  smokeEffect:
+  - {fileID: 157392, guid: 9b19bae0052bcee409cd5e2000af79cc, type: 2}
+  - {fileID: 179490, guid: 8ea529a101b2e0c41b9526b11ca5de8d, type: 2}
+  - {fileID: 183816, guid: 01da1104e1c56a44aa36dc754dbe1ef0, type: 2}
+  smokeParent: {fileID: 0}
+  mainLogic: {fileID: 0}
   bossX: 0
   bossY: 0
   radiusX: 0
   radiusY: 0
   durationMultiplier: 0
+  smokeRegenNum: 60
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

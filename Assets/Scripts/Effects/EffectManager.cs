@@ -23,11 +23,13 @@ public class EffectManager : MonoBehaviour {
 	// Use this for initialization - Temporary
 	void Start () {
 
+        /*
         bossX = 0.0f;
         bossY = 1.2f;
         radiusX = 1.0f;
 		radiusY = 1.2f;
         durationMultiplier = 0.1f;
+        */
 
 		// elapsedTime = 6.0f; // Temp
 

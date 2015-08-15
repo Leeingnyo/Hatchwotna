@@ -26,16 +26,17 @@ public class MainLogic : MonoBehaviour {
 	int bossHp; //보스의 현재 체력
 	int bossKillHP=200; //해치웠나? 나올때 보스가 죽는 체력 (해치웠나 없이 보스가 죽는 체력은 0)
 
-	int timer; //다음 해치웠나? 까지 남은 시간 (0이 되면 발생)
-	public int timerSum; //누계 타이머 (이펙트 부분에서 사용되므로 public으로 설정)
-	int count3=30; //3 하는 이미지가 튀어나오는 시간
-	int count2=20; //2 하는 이미지가 튀어나오는 시간
-	int count1=10; //1 하는 이미지가 튀어나오는 시간
+	float timer; //다음 해치웠나? 까지 남은 시간 (0이 되면 발생)
+	public float timerSum; //누계 타이머 (이펙트 부분에서 사용되므로 public으로 설정)
+	float count3=3f; //3 하는 이미지가 튀어나오는 시간
+	float count2=2f; //2 하는 이미지가 튀어나오는 시간
+	float count1=1f; //1 하는 이미지가 튀어나오는 시간
+	int countstate=4;
 
-	int timerMinRange=200; //해치웠나 타이머 설정시 최소 시간
-	int timerMaxRange=301; //해치웠나 타이머 설정시 최대 시간
+	int timerMinRange=700; //해치웠나 타이머 설정시 최소 시간
+	int timerMaxRange=1001; //해치웠나 타이머 설정시 최대 시간
 	public bool hatchWotnaState=false; //해치웠나 상태 false로 초기화
-	int hatchWotnaTimer=0; //해치웠나 타이머 설정시 최대 시간
+	float hatchWotnaTimer=0; //해치웠나 대기 타이머
 
 	void BossHpUpdate(){
 		if (bossHp>=0) hpgreen.transform.localScale = new Vector3 ((float)(bossHp)/(float)(bossMaxHp), 1, 1); //HP 게이지바 크기 설정
@@ -61,7 +62,7 @@ public class MainLogic : MonoBehaviour {
 		BossHpUpdate(); //보스 HP띄우는 UI 갱신
 		if (bossHp < 0) { //보스 체력이 0이 되어 강제종료
 			hatchWotnaState = true; //공격 못하게 막음
-			hatchWotnaTimer=150;
+			hatchWotnaTimer=3f;
 			//System.Threading.Thread.Sleep(3000); //3초 대기
 		}
 	}
@@ -75,7 +76,7 @@ public class MainLogic : MonoBehaviour {
 		else { //2플레이어가 해치웠나? 물어봄
 			ask2.transform.position = new Vector3 (0, 0, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
 		}
-		hatchWotnaTimer=150;
+		hatchWotnaTimer=3f;
 		//System.Threading.Thread.Sleep(3000); //3초 대기
 	}
 
@@ -88,35 +89,38 @@ public class MainLogic : MonoBehaviour {
 		damage2 = 0; //현재 피해 초기화2
 		bossMaxHp = 1200; //보스 최대 체력 초기화
 		bossHp = bossMaxHp; //보스 현재 체력 초기화
-		timer=UnityEngine.Random.Range(timerMinRange, timerMaxRange); //다음 해치웠나? 타이머 시간 설정
+		countstate = 4;
+		timer=(float)(UnityEngine.Random.Range(timerMinRange, timerMaxRange))/100f; //다음 해치웠나? 타이머 시간 설정
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (timer>0){
-			timer--; //프레임마다 타이머 감소
-			timerSum++; //프레임마다 누적 타이머 증가
+			timer=timer-Time.deltaTime; //프레임마다 타이머 감소
+			timerSum=timerSum+Time.deltaTime; //프레임마다 누적 타이머 증가
 		}
-
-		if (timer == count3) {
-			countdown3.transform.position = new Vector3 (0, 0, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
-		} 
-		else if (timer == count2) {
-			countdown3.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
-			countdown2.transform.position = new Vector3 (0, 0, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
-		} 
-		else if (timer == count1) {
-			countdown2.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
-			countdown1.transform.position = new Vector3 (0, 0, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
-		} 
-		else if (timer == 0 && hatchWotnaState == false) {
-			countdown1.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
-			Hatchwotna(); //해치웠나? 함수 호출
+		if (hatchWotnaState == false) {
+			if (timer <= 0) {
+				countdown1.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
+				Hatchwotna (); //해치웠나? 함수 호출
+				countstate=4;
+			} else if (timer <= count1 && countstate > 1) {
+				countdown2.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
+				countdown1.transform.position = new Vector3 (0, 0, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
+				countstate = 1;
+			} else if (timer <= count2 && countstate > 2) {
+				countdown3.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
+				countdown2.transform.position = new Vector3 (0, 0, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
+				countstate = 2;
+			} else if (timer <= count3 && countstate > 3) {
+				countdown3.transform.position = new Vector3 (0, 0, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
+				countstate = 3;
+			} 
 		}
 
 		if (hatchWotnaState == true) {
-			if (hatchWotnaTimer>0) hatchWotnaTimer--;
-			else if (hatchWotnaTimer==0){
+			if (hatchWotnaTimer>0) hatchWotnaTimer=hatchWotnaTimer-Time.deltaTime;
+			else if (hatchWotnaTimer<=0){
 				if (bossHp < 0) { //보스 체력이 0이 되어 강제종료
 					if (damageSum1 < damageSum2) { //2플레이어가 누적 딜 높음
 						winner=1; //1플레이어 승리
@@ -136,7 +140,7 @@ public class MainLogic : MonoBehaviour {
 						}
 						Ending(winner); //엔딩 호출
 					}
-					timer=UnityEngine.Random.Range(timerMinRange, timerMaxRange); //다음 해치웠나? 타이머 시간 설정
+					timer=(float)(UnityEngine.Random.Range(timerMinRange, timerMaxRange))/100f;
 					damage1 = 0; //1플레이어-이번 페이즈에 누적된 피해량 초기화
 					damage2 = 0; //2플레이어-이번 페이즈에 누적된 피해량 초기화
 					ask1.transform.position = new Vector3 (-5000, -5000, 0); //해치웠나? 이미지 지우기 (안보이는곳으로 보냄)

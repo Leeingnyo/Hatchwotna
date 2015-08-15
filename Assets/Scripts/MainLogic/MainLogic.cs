@@ -83,11 +83,11 @@ public class MainLogic : MonoBehaviour {
 		//캐릭터 자세 변경하는거 호출할것
 		if (damage1 < damage2) { //1플레이어가 해치웠나? 물어봄
             targetPlayerNumber = 1;
-			ask1.transform.position = new Vector3 (0, 0, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
+			ask1.transform.position = new Vector3 (0, -3.5f, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
 		} 
 		else { //2플레이어가 해치웠나? 물어봄
             targetPlayerNumber = 2;
-			ask2.transform.position = new Vector3 (0, 0, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
+			ask2.transform.position = new Vector3 (0, -3.5f, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
 		}
 		hatchWotnaTimer=3f;
 		//System.Threading.Thread.Sleep(3000); //3초 대기

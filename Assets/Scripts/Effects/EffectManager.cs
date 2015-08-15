@@ -15,9 +15,11 @@ public class EffectManager : MonoBehaviour {
     
     public float bossX, bossY;
     public float radiusX, radiusY;
-    public float durationMultiplier;
+    // public float smokeAlphaMultiplier;
 
     public int smokeRegenNum;
+
+    bool isSmokeFading = false;
 
 
 	// Use this for initialization - Temporary
@@ -38,6 +40,16 @@ public class EffectManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        /*
+        float alphaAdditional = mainLogic.timerSum * smokeAlphaMultiplier;
+        foreach(GameObject smoke in smokeEffect)
+        {
+            Color origColor = smoke.GetComponent<Renderer>().material.color;
+
+            smoke.GetComponent<Renderer>().material.color = 
+                new Color(origColor.r, origColor.g, origColor.b, Mathf.Clamp(origColor.a + alphaAdditional, 0f, 1f));
+        }
+         */
 	
 	}
 
@@ -83,10 +95,26 @@ public class EffectManager : MonoBehaviour {
             StartCoroutine(FadeEffect(explosion, duration, true));
         }
 
+        // float alphaAdditional = mainLogic.timerSum * smokeAlphaMultiplier;
+ 
         SetRandPosition(out posX, out posY);
-
+        
         GameObject smoke = (GameObject) Instantiate(smokeEffect[Random.Range(0, 3)], new Vector3(posX, posY, 0), Quaternion.identity);
+        
+        /*
+        // Smoke alpha (transparency) increse
+        Color origColor = smoke.GetComponent<Renderer>().material.color;
+        Debug.Log("smoke alpha : " + ((Color32)origColor).a);
+        smoke.GetComponent<Renderer>().material.color = 
+            new Color(origColor.r, origColor.g, origColor.b, Mathf.Clamp(0.2f + alphaAdditional, 0f, 1f));
+        */
+
+        // Smoke initial alpha (transparency) setting
+        Color origColor = smoke.GetComponent<Renderer>().material.color;
+        smoke.GetComponent<Renderer>().material.color = new Color(origColor.r, origColor.g, origColor.b, 0.2f);
+
         smoke.transform.SetParent(smokeParent.transform);
+        StartCoroutine(SmokeThicker(smoke, 8.0f));
     }
 
     void SetRandPosition(out float posX, out float posY)
@@ -97,10 +125,11 @@ public class EffectManager : MonoBehaviour {
 
     public void HideSmokes()
     {
+        isSmokeFading = true;
         // smokeParent.SetActive(false);
         foreach (Transform smokeTf in smokeParent.transform)
         {
-            StartCoroutine(FadeEffect(smokeTf.gameObject, 1.0f, true));
+            StartCoroutine(FadeEffect(smokeTf.gameObject, 2.5f, true));
         }
     }
 
@@ -118,6 +147,7 @@ public class EffectManager : MonoBehaviour {
 
     IEnumerator FadeEffect(GameObject effect, float duration, bool destroyOnEnd)
     {
+
         Color colorStart = effect.GetComponent<Renderer>().material.color;
         Color colorEnd = new Color(colorStart.r, colorStart.g, colorStart.b, 0.0f);
 
@@ -129,7 +159,24 @@ public class EffectManager : MonoBehaviour {
         effect.GetComponent<Renderer>().material.color = Color.Lerp(colorStart, colorEnd, 1);
         yield return null;
 
+        if (effect.name.Contains("smoke")) isSmokeFading = false;
+
         if(destroyOnEnd) Destroy(effect);
+    }
+
+    IEnumerator SmokeThicker(GameObject smoke, float duration)
+    {
+        Color colorStart = smoke.GetComponent<Renderer>().material.color;
+        Color colorEnd = new Color(colorStart.r, colorStart.g, colorStart.b, 1.0f);
+
+        for (float t = 0.0f; t < duration; t += Time.deltaTime)
+        {
+            if (isSmokeFading) yield break;
+            smoke.GetComponent<Renderer>().material.color = Color.Lerp(colorStart, colorEnd, t / duration);
+            yield return null;
+        }
+        smoke.GetComponent<Renderer>().material.color = Color.Lerp(colorStart, colorEnd, 1);
+        yield return null;
     }
 
 	// For Test

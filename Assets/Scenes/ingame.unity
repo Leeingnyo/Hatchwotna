@@ -1716,6 +1716,10 @@ Prefab:
       propertyPath: durationMultiplier
       value: .100000001
       objectReference: {fileID: 0}
+    - target: {fileID: 11480098, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}
+      propertyPath: smokeRegenNum
+      value: 35
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}
   m_IsPrefabParent: 0

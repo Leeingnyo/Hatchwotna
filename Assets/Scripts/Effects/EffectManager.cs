@@ -133,6 +133,7 @@ public class EffectManager : MonoBehaviour {
         }
     }
 
+    // 연기 재생성
     public void ShowSmokes()
     {
         for(int i = 0; i < smokeRegenNum; i++)
@@ -141,7 +142,10 @@ public class EffectManager : MonoBehaviour {
             float posY = Random.Range(bossY - radiusY, bossY + radiusY + 1);
 
             GameObject smoke = (GameObject)Instantiate(smokeEffect[Random.Range(0, 3)], new Vector3(posX, posY, 0), Quaternion.identity);
+            Color origColor = smoke.GetComponent<Renderer>().material.color;
+            smoke.GetComponent<Renderer>().material.color = new Color(origColor.r, origColor.g, origColor.b, 0.1f);
             smoke.transform.SetParent(smokeParent.transform);
+            StartCoroutine(SmokeThicker(smoke, 8.0f));
         }
     }
 

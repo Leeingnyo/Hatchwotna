@@ -203,6 +203,7 @@ public class MainLogic : MonoBehaviour {
 						demonAngry.transform.position = new Vector3 (0, 0.3f, 0); //악마 이미지 위치 설정
 						sound=demonAngry.GetComponent<AudioSource>();
 						sound.Play();
+                        FindObjectOfType<EffectManager>().ShowSmokes(); // 연기 일정량 재생성
 						demonTimer=2f;
 						timer=(float)(UnityEngine.Random.Range(timerMinRange, timerMaxRange))/100f;
 						damage1 = 0; //1플레이어-이번 페이즈에 누적된 피해량 초기화

@@ -22,6 +22,8 @@ public class MainLogic : MonoBehaviour {
 	int lastAttack; //마지막으로 공격한 플레이어
 	int winner; //승리한 플레이어
 
+    public int targetPlayerNumber;
+
 	int bossMaxHp; //보스의 최대 체력
 	int bossHp; //보스의 현재 체력
 	int bossKillHP=200; //해치웠나? 나올때 보스가 죽는 체력 (해치웠나 없이 보스가 죽는 체력은 0)
@@ -39,6 +41,15 @@ public class MainLogic : MonoBehaviour {
 	float hatchWotnaTimer=0; //해치웠나 대기 타이머
 
 	void BossHpUpdate(){
+		if ((float)(bossHp) / (float)(bossMaxHp) > 0.5f) {
+			hpgreen.GetComponent<SpriteRenderer>().color = new Color(0, 0.9f, 0); //체력바 초록색 설정
+		} 
+		else if ((float)(bossHp) / (float)(bossMaxHp) > 0.2f) {
+			hpgreen.GetComponent<SpriteRenderer>().color = new Color(0.9f, 0.6f, 0); //체력바 주황색 설정
+		} 
+		else {
+			hpgreen.GetComponent<SpriteRenderer>().color = new Color(0.9f, 0, 0); //체력바 빨강색 설정
+		}
 		if (bossHp>=0) hpgreen.transform.localScale = new Vector3 ((float)(bossHp)/(float)(bossMaxHp), 1, 1); //HP 게이지바 크기 설정
 		else hpgreen.transform.localScale = new Vector3 (0, 1, 1); //HP 게이지바 크기 설정
 		dmgtext.text = "보스 남은체력 (프레임당 5씩 닳게 설정함)" + Convert.ToString (bossHp)+" 타이머 : "+Convert.ToString (timer);
@@ -71,9 +82,11 @@ public class MainLogic : MonoBehaviour {
 		hatchWotnaState = true; //공격 못하게 막음
 		//캐릭터 자세 변경하는거 호출할것
 		if (damage1 < damage2) { //1플레이어가 해치웠나? 물어봄
+            targetPlayerNumber = 1;
 			ask1.transform.position = new Vector3 (0, 0, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
 		} 
 		else { //2플레이어가 해치웠나? 물어봄
+            targetPlayerNumber = 2;
 			ask2.transform.position = new Vector3 (0, 0, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
 		}
 		hatchWotnaTimer=3f;
@@ -91,6 +104,7 @@ public class MainLogic : MonoBehaviour {
 		bossHp = bossMaxHp; //보스 현재 체력 초기화
 		countstate = 4;
 		timer=(float)(UnityEngine.Random.Range(timerMinRange, timerMaxRange))/100f; //다음 해치웠나? 타이머 시간 설정
+		hpgreen.GetComponent<SpriteRenderer>().color = new Color(0, 0.9f, 0); //체력바 초록색 설정
 	}
 	
 	// Update is called once per frame

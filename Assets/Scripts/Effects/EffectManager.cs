@@ -8,8 +8,7 @@ public class EffectManager : MonoBehaviour {
 
     public GameObject smokeParent;
 
-    public float elapsedTime;
-    // public GameMaster gm;
+    // public float elapsedTime;
     public MainLogic mainLogic;
     
     public float bossX, bossY;
@@ -26,7 +25,7 @@ public class EffectManager : MonoBehaviour {
 		radiusY = 1.2f;
         durationMultiplier = 0.1f;
 
-		elapsedTime = 6.0f; // Temp
+		// elapsedTime = 6.0f; // Temp
 
 		// StartCoroutine ("EffectRotation");
 	}
@@ -42,7 +41,7 @@ public class EffectManager : MonoBehaviour {
         float posX = Random.Range(bossX - radiusX, bossX + radiusX);
         float posY = Random.Range(bossY - radiusY, bossY + radiusY);
         GameObject explosion;
-        float duration = elapsedTime * durationMultiplier;
+        float duration = mainLogic.timerSum * durationMultiplier;
 
 		Debug.Log ("EffectGen entered!");
 

@@ -159,6 +159,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!4 &11311047
 Transform:
   m_ObjectHideFlags: 0
@@ -171,7 +172,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!1 &147544974
+--- !u!1 &147544974 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 132954, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_PrefabInternal: {fileID: 1146456394}
@@ -256,7 +257,7 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 0
---- !u!1 &337577541
+--- !u!1 &337577541 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 127280, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_PrefabInternal: {fileID: 1146456394}
@@ -328,7 +329,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -40}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: .5, y: .5}
---- !u!1 &488930352
+--- !u!1 &488930352 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 174554, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_PrefabInternal: {fileID: 1146456394}
@@ -481,7 +482,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 30}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: .5, y: .5}
---- !u!1 &597599280
+--- !u!1 &597599280 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 145698, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_PrefabInternal: {fileID: 1146456394}
@@ -744,7 +745,7 @@ MonoBehaviour:
   targetPlayerNumber: 0
   timerSum: 0
   hatchWotnaState: 0
---- !u!1 &816012804
+--- !u!1 &816012804 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 149492, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_PrefabInternal: {fileID: 1146456394}
@@ -1013,7 +1014,7 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 0
---- !u!1 &925782529
+--- !u!1 &925782529 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 164748, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_PrefabInternal: {fileID: 1146456394}
@@ -1357,7 +1358,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &1146456395
+--- !u!4 &1146456395 stripped
 Transform:
   m_PrefabParentObject: {fileID: 464618, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_PrefabInternal: {fileID: 1146456394}
@@ -1799,7 +1800,7 @@ SpriteRenderer:
   m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: ac7b651fd79041b4dbc2a60489a8cc37, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!1 &1672246149
+--- !u!1 &1672246149 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 196656, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_PrefabInternal: {fileID: 1146456394}
@@ -1849,6 +1850,7 @@ MonoBehaviour:
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
+  m_RepeatDelay: .5
   m_AllowActivationOnMobileDevice: 0
 --- !u!114 &1720764913
 MonoBehaviour:
@@ -1903,7 +1905,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2069106874}
   m_RootOrder: 0
---- !u!1 &1815046176
+--- !u!1 &1815046176 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 135692, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_PrefabInternal: {fileID: 1146456394}
@@ -1976,7 +1978,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!1 &1937053910
+--- !u!1 &1937053910 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 107872, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_PrefabInternal: {fileID: 1146456394}
@@ -2344,7 +2346,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2031239197}
---- !u!1 &2031299489
+--- !u!1 &2031299489 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 123820, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_PrefabInternal: {fileID: 1146456394}
@@ -2417,7 +2419,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!4 &2069106874
+--- !u!4 &2069106874 stripped
 Transform:
   m_PrefabParentObject: {fileID: 451252, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}
   m_PrefabInternal: {fileID: 1468571465}

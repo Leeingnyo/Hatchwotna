@@ -79,6 +79,12 @@ public class MainLogic : MonoBehaviour {
 		bossHp = bossHp - n; //보스 HP 감소
 		BossHpUpdate(); //보스 HP띄우는 UI 갱신
 		if (bossHp < 0) { //보스 체력이 0이 되어 강제종료
+			countdown11.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
+			countdown12.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
+			countdown21.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
+			countdown22.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
+			countdown31.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
+			countdown32.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
 			demon.transform.position = new Vector3 (-5000, -5000, 0); //악마 이미지 위치 설정
 			demonDead.transform.position = new Vector3 (-0.2f, 0.2f, 0); //악마 이미지 위치 설정
 			FindObjectOfType<EffectManager> ().HideSmokes();
@@ -188,7 +194,7 @@ public class MainLogic : MonoBehaviour {
 					}
 					else{
 						demon.transform.position = new Vector3 (-5000, -5000, 0); //악마 이미지 위치 설정
-						demonAngry.transform.position = new Vector3 (0, 0.7f, 0); //악마 이미지 위치 설정
+						demonAngry.transform.position = new Vector3 (0, 0.3f, 0); //악마 이미지 위치 설정
 						demonTimer=2f;
 						timer=(float)(UnityEngine.Random.Range(timerMinRange, timerMaxRange))/100f;
 						damage1 = 0; //1플레이어-이번 페이즈에 누적된 피해량 초기화

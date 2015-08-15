@@ -6,9 +6,12 @@ using UnityEngine.UI;
 
 public class MainLogic : MonoBehaviour {
 	public Text dmgtext;
-	public GameObject countdown3; //3 2 1 세는 카운트 이미지
-	public GameObject countdown2; //3 2 1 세는 카운트 이미지
-	public GameObject countdown1; //3 2 1 세는 카운트 이미지
+	public GameObject countdown31; //3 2 1 세는 카운트 이미지
+	public GameObject countdown21; //3 2 1 세는 카운트 이미지
+	public GameObject countdown11; //3 2 1 세는 카운트 이미지
+	public GameObject countdown32; //3 2 1 세는 카운트 이미지
+	public GameObject countdown22; //3 2 1 세는 카운트 이미지
+	public GameObject countdown12; //3 2 1 세는 카운트 이미지
 	public GameObject hpgauge; //HP 게이지바의 고정된 부분
 	public GameObject hpgreen; //HP 게이지바의 줄어드는 초록색 부분
 	public GameObject ask1; //해치웠나? 하고 물어보는 말풍선
@@ -90,6 +93,7 @@ public class MainLogic : MonoBehaviour {
 			ask2.transform.position = new Vector3 (0, -3.5f, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
 		}
 		hatchWotnaTimer=3f;
+		FindObjectOfType<EffectManager> ().HideSmokes();
 		//System.Threading.Thread.Sleep(3000); //3초 대기
 	}
 
@@ -115,19 +119,25 @@ public class MainLogic : MonoBehaviour {
 		}
 		if (hatchWotnaState == false) {
 			if (timer <= 0) {
-				countdown1.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
+				countdown11.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
+				countdown12.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
 				Hatchwotna (); //해치웠나? 함수 호출
 				countstate=4;
 			} else if (timer <= count1 && countstate > 1) {
-				countdown2.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
-				countdown1.transform.position = new Vector3 (0, 0, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
+				countdown21.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
+				countdown22.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
+				if (damage1<damage2) countdown11.transform.position = new Vector3 (0, -3.5f, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
+				else countdown12.transform.position = new Vector3 (0, -3.5f, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
 				countstate = 1;
 			} else if (timer <= count2 && countstate > 2) {
-				countdown3.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
-				countdown2.transform.position = new Vector3 (0, 0, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
+				countdown31.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
+				countdown32.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
+				if (damage1<damage2) countdown21.transform.position = new Vector3 (0, -3.5f, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
+				else countdown22.transform.position = new Vector3 (0, -3.5f, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
 				countstate = 2;
 			} else if (timer <= count3 && countstate > 3) {
-				countdown3.transform.position = new Vector3 (0, 0, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
+				if (damage1<damage2) countdown31.transform.position = new Vector3 (0, -3.5f, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
+				else countdown32.transform.position = new Vector3 (0, -3.5f, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
 				countstate = 3;
 			} 
 		}

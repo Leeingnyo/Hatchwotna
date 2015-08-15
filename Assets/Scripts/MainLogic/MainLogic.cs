@@ -18,6 +18,7 @@ public class MainLogic : MonoBehaviour {
 	public GameObject ask2; //해치웠나? 하고 물어보는 말풍선
 	public GameObject demon; //HP 게이지바의 고정된 부분
 	public GameObject demonAngry; //HP 게이지바의 고정된 부분
+	public GameObject demonDead; //HP 게이지바의 고정된 부분
 
 	int damageSum1; //1플레이어-전체 게임에서 누적된 피해량
 	int damage1; //1플레이어-이번 페이즈에 누적된 피해량
@@ -78,6 +79,9 @@ public class MainLogic : MonoBehaviour {
 		bossHp = bossHp - n; //보스 HP 감소
 		BossHpUpdate(); //보스 HP띄우는 UI 갱신
 		if (bossHp < 0) { //보스 체력이 0이 되어 강제종료
+			demon.transform.position = new Vector3 (-5000, -5000, 0); //악마 이미지 위치 설정
+			demonDead.transform.position = new Vector3 (-0.2f, 0.2f, 0); //악마 이미지 위치 설정
+			FindObjectOfType<EffectManager> ().HideSmokes();
 			hatchWotnaState = true; //공격 못하게 막음
 			hatchWotnaTimer=3f;
 			//System.Threading.Thread.Sleep(3000); //3초 대기
@@ -96,6 +100,10 @@ public class MainLogic : MonoBehaviour {
 			ask2.transform.position = new Vector3 (0, -3.5f, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
 		}
 		hatchWotnaTimer=3f;
+		if (bossHp <= bossKillHP){ //보스 체력이 해치웠나? 할때 죽는 체력 이하일 때
+			demon.transform.position = new Vector3 (-5000, -5000, 0); //악마 이미지 위치 설정
+			demonDead.transform.position = new Vector3 (-0.2f, 0.2f, 0); //악마 이미지 위치 설정
+		}
 		FindObjectOfType<EffectManager> ().HideSmokes();
 		//System.Threading.Thread.Sleep(3000); //3초 대기
 	}
@@ -178,15 +186,17 @@ public class MainLogic : MonoBehaviour {
 						}
 						Ending(winner); //엔딩 호출
 					}
-					demon.transform.position = new Vector3 (-5000, -5000, 0); //악마 이미지 위치 설정
-					demonAngry.transform.position = new Vector3 (0, 0.7f, 0); //악마 이미지 위치 설정
-					demonTimer=2f;
-					timer=(float)(UnityEngine.Random.Range(timerMinRange, timerMaxRange))/100f;
-					damage1 = 0; //1플레이어-이번 페이즈에 누적된 피해량 초기화
-					damage2 = 0; //2플레이어-이번 페이즈에 누적된 피해량 초기화
-					ask1.transform.position = new Vector3 (-5000, -5000, 0); //해치웠나? 이미지 지우기 (안보이는곳으로 보냄)
-					ask2.transform.position = new Vector3 (-5000, -5000, 0); //해치웠나? 이미지 지우기 (안보이는곳으로 보냄)
-					hatchWotnaState = false; //공격 가능하게 품
+					else{
+						demon.transform.position = new Vector3 (-5000, -5000, 0); //악마 이미지 위치 설정
+						demonAngry.transform.position = new Vector3 (0, 0.7f, 0); //악마 이미지 위치 설정
+						demonTimer=2f;
+						timer=(float)(UnityEngine.Random.Range(timerMinRange, timerMaxRange))/100f;
+						damage1 = 0; //1플레이어-이번 페이즈에 누적된 피해량 초기화
+						damage2 = 0; //2플레이어-이번 페이즈에 누적된 피해량 초기화
+						ask1.transform.position = new Vector3 (-5000, -5000, 0); //해치웠나? 이미지 지우기 (안보이는곳으로 보냄)
+						ask2.transform.position = new Vector3 (-5000, -5000, 0); //해치웠나? 이미지 지우기 (안보이는곳으로 보냄)
+						hatchWotnaState = false; //공격 가능하게 품
+					}
 				}
 
 			}

@@ -21,8 +21,7 @@ public class SkillActivator : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (true && !isSkillActivated)
-            // FIXME true는 해치웠나 페이즈인지 확인하기
+        if (!player.mainlogic.hatchWotnaState && !isSkillActivated)
         {
             if (Input.GetKey(skill01))
             {

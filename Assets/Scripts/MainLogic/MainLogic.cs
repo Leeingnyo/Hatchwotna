@@ -22,6 +22,8 @@ public class MainLogic : MonoBehaviour {
 	int lastAttack; //마지막으로 공격한 플레이어
 	int winner; //승리한 플레이어
 
+    public int targetPlayerNumber;
+
 	int bossMaxHp; //보스의 최대 체력
 	int bossHp; //보스의 현재 체력
 	int bossKillHP=200; //해치웠나? 나올때 보스가 죽는 체력 (해치웠나 없이 보스가 죽는 체력은 0)
@@ -71,9 +73,11 @@ public class MainLogic : MonoBehaviour {
 		hatchWotnaState = true; //공격 못하게 막음
 		//캐릭터 자세 변경하는거 호출할것
 		if (damage1 < damage2) { //1플레이어가 해치웠나? 물어봄
+            targetPlayerNumber = 1;
 			ask1.transform.position = new Vector3 (0, 0, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
 		} 
 		else { //2플레이어가 해치웠나? 물어봄
+            targetPlayerNumber = 2;
 			ask2.transform.position = new Vector3 (0, 0, 0); //해치웠나? 이미지 위치 설정 (지금은 화면 중앙)
 		}
 		hatchWotnaTimer=3f;

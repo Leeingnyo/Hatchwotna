@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class MainLogic : MonoBehaviour {
 	AudioSource sound;
+	public GameObject[] number1=new GameObject[10];
+	public GameObject[] number2=new GameObject[10];
 
 	public Text dmgtext;
 	public GameObject countdown31; //3 2 1 세는 카운트 이미지
@@ -26,6 +28,11 @@ public class MainLogic : MonoBehaviour {
 	int damage1; //1플레이어-이번 페이즈에 누적된 피해량
 	int damageSum2; //2플레이어-전체 게임에서 누적된 피해량
 	int damage2; //2플레이어-이번 페이즈에 누적된 피해량
+
+	int fakeDmg;
+	int fakeDmgSum1;
+	int fakeDmgSum2;
+	float dmgx, dmgy;
 
 	int lastAttack; //마지막으로 공격한 플레이어
 	int winner; //승리한 플레이어
@@ -70,6 +77,31 @@ public class MainLogic : MonoBehaviour {
 
 	public void DamageHp(int n, int atk){
 		lastAttack = atk; //마지막으로 공격한 플레이어 설정
+		fakeDmg=UnityEngine.Random.Range(n*1000+100, n*1000+1000); //다음 해치웠나? 타이머 시간 설정
+		dmgx = 0.8f;
+		dmgy = 1.5f;
+		if (atk==1) GameObject.Instantiate(number1[fakeDmg%10], new Vector3(dmgx, dmgy, 0), Quaternion.identity);
+		else GameObject.Instantiate(number2[fakeDmg%10], new Vector3(dmgx, dmgy, 0), Quaternion.identity);
+		fakeDmg = fakeDmg / 10;
+		dmgx = dmgx - 0.5f;
+		if (atk==1) GameObject.Instantiate(number1[fakeDmg%10], new Vector3(dmgx, dmgy, 0), Quaternion.identity);
+		else GameObject.Instantiate(number2[fakeDmg%10], new Vector3(dmgx, dmgy, 0), Quaternion.identity);
+		fakeDmg = fakeDmg / 10;
+		dmgx = dmgx - 0.5f;
+		if (atk==1) GameObject.Instantiate(number1[fakeDmg%10], new Vector3(dmgx, dmgy, 0), Quaternion.identity);
+		else GameObject.Instantiate(number2[fakeDmg%10], new Vector3(dmgx, dmgy, 0), Quaternion.identity);
+		fakeDmg = fakeDmg / 10;
+		dmgx = dmgx - 0.5f;
+		if (atk==1) GameObject.Instantiate(number1[fakeDmg%10], new Vector3(dmgx, dmgy, 0), Quaternion.identity);
+		else GameObject.Instantiate(number2[fakeDmg%10], new Vector3(dmgx, dmgy, 0), Quaternion.identity);
+		fakeDmg = fakeDmg / 10;
+		dmgx = dmgx - 0.5f;
+		if (fakeDmg % 10 != 0) {
+			if (atk == 1)
+				GameObject.Instantiate (number1 [fakeDmg % 10], new Vector3 (dmgx, dmgy, 0), Quaternion.identity);
+			else
+				GameObject.Instantiate (number2 [fakeDmg % 10], new Vector3 (dmgx, dmgy, 0), Quaternion.identity);
+		}
 		if (atk == 1) { //공격 플레이어가 1일때
 			damageSum1=damageSum1+n; //1플레이어 전체 피해 누적
 			damage1=damage1+n; //1플레이어 이번 페이즈 피해 누적

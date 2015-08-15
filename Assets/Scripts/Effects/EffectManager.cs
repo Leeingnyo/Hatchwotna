@@ -44,7 +44,7 @@ public class EffectManager : MonoBehaviour {
     {
         float posX, posY;
         List<GameObject> explosions = new List<GameObject>();
-        float duration = mainLogic.timerSum * durationMultiplier;
+        float duration = 0.5f /* mainLogic.timerSum * durationMultiplier */;
 
 		Debug.Log ("EffectGen entered!");
 

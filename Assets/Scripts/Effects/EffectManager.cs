@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EffectManager : MonoBehaviour {
 
-    public GameObject[] explosionEffect;
+    public GameObject[] explosionEffectP1;
+    public GameObject[] explosionEffectP2;
     public GameObject[] smokeEffect;
 
     public GameObject smokeParent;
@@ -14,6 +16,8 @@ public class EffectManager : MonoBehaviour {
     public float bossX, bossY;
     public float radiusX, radiusY;
     public float durationMultiplier;
+
+    public int smokeRegenNum;
 
 
 	// Use this for initialization - Temporary
@@ -38,43 +42,55 @@ public class EffectManager : MonoBehaviour {
 
     public void EffectGen(int skillType)
     {
-        float posX = Random.Range(bossX - radiusX, bossX + radiusX);
-        float posY = Random.Range(bossY - radiusY, bossY + radiusY);
-        GameObject explosion;
+        float posX, posY;
+        List<GameObject> explosions = new List<GameObject>();
         float duration = mainLogic.timerSum * durationMultiplier;
 
 		Debug.Log ("EffectGen entered!");
 
         switch(skillType)
         {
-            case 1:
-                explosion = (GameObject)Instantiate(explosionEffect[0], new Vector3(posX, posY, 0), Quaternion.identity);
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+                for (int i = 0; i < 3; i++)
+                {
+                    SetRandPosition(out posX, out posY);
+                    explosions.Add((GameObject)Instantiate(explosionEffectP1[i], new Vector3(posX, posY, 0), Quaternion.identity));
+                }
                 break;
-            case 2:
-				explosion = (GameObject)Instantiate(explosionEffect[1], new Vector3(posX, posY, 0), Quaternion.identity);
-                break;
-            case 3:
-				explosion = (GameObject)Instantiate(explosionEffect[2], new Vector3(posX, posY, 0), Quaternion.identity);
-                break;
-            case 4:
-				explosion = (GameObject)Instantiate(explosionEffect[3], new Vector3(posX, posY, 0), Quaternion.identity);
+            case 21:
+            case 22:
+            case 23:
+            case 24:
+                SetRandPosition(out posX, out posY);
+                explosions.Add((GameObject)Instantiate(explosionEffectP2[Random.Range(0, 3)], new Vector3(posX, posY, 0), Quaternion.identity));
                 break;
             default:
                 Debug.Log("Wrong SkillType number in EffectGen()");
-				explosion = null;
+				explosions = null;
                 break;
         }
 
 		Debug.Log ("Explosion instantiate finished!");
 
         // FadeOut coroutine start
-        StartCoroutine(FadeEffect(explosion, duration, true));
+        foreach (GameObject explosion in explosions)
+        {
+            StartCoroutine(FadeEffect(explosion, duration, true));
+        }
 
-        posX = Random.Range(bossX - radiusX, bossX + radiusX + 1);
-        posY = Random.Range(bossY - radiusY, bossY + radiusY + 1);
+        SetRandPosition(out posX, out posY);
 
         GameObject smoke = (GameObject) Instantiate(smokeEffect[Random.Range(0, 3)], new Vector3(posX, posY, 0), Quaternion.identity);
         smoke.transform.SetParent(smokeParent.transform);
+    }
+
+    void SetRandPosition(out float posX, out float posY)
+    {
+        posX = Random.Range(bossX - radiusX, bossX + radiusX + 1);
+        posY = Random.Range(bossY - radiusY, bossY + radiusY + 1);
     }
 
     public void HideSmokes()
@@ -82,17 +98,19 @@ public class EffectManager : MonoBehaviour {
         // smokeParent.SetActive(false);
         foreach (Transform smokeTf in smokeParent.transform)
         {
-            StartCoroutine(FadeEffect(smokeTf.gameObject, 1.0f, false));
+            StartCoroutine(FadeEffect(smokeTf.gameObject, 1.0f, true));
         }
     }
 
     public void ShowSmokes()
     {
-        //smokeParent.SetActive(true);
-        foreach (Transform smokeTf in smokeParent.transform)
+        for(int i = 0; i < smokeRegenNum; i++)
         {
-            Color color = smokeTf.gameObject.GetComponent<Renderer>().material.color;
-            smokeTf.gameObject.GetComponent<Renderer>().material.color = new Color(color.r, color.g, color.b, 1.0f);
+            float posX = Random.Range(bossX - radiusX, bossX + radiusX + 1);
+            float posY = Random.Range(bossY - radiusY, bossY + radiusY + 1);
+
+            GameObject smoke = (GameObject)Instantiate(smokeEffect[Random.Range(0, 3)], new Vector3(posX, posY, 0), Quaternion.identity);
+            smoke.transform.SetParent(smokeParent.transform);
         }
     }
 
@@ -108,6 +126,7 @@ public class EffectManager : MonoBehaviour {
         }
         effect.GetComponent<Renderer>().material.color = Color.Lerp(colorStart, colorEnd, 1);
         yield return null;
+
         if(destroyOnEnd) Destroy(effect);
     }
 

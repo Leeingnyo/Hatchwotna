@@ -603,6 +603,26 @@ Prefab:
       propertyPath: m_Name
       value: image
       objectReference: {fileID: 0}
+    - target: {fileID: 21249976, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21263250, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21293614, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21273108, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21292204, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7fc9ba7be5a13c240b33e549ecb221db, type: 2}
   m_IsPrefabParent: 0
@@ -794,18 +814,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 11480098, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}
-      propertyPath: smokeEffect.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 11480098, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}
-      propertyPath: explosionEffectP1.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 11480098, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}
-      propertyPath: explosionEffectP2.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 451252, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -846,46 +854,6 @@ Prefab:
       propertyPath: mainLogic
       value: 
       objectReference: {fileID: 811284612}
-    - target: {fileID: 11480098, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}
-      propertyPath: smokeEffect.Array.data[0]
-      value: 
-      objectReference: {fileID: 157392, guid: 9b19bae0052bcee409cd5e2000af79cc, type: 2}
-    - target: {fileID: 11480098, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}
-      propertyPath: smokeEffect.Array.data[1]
-      value: 
-      objectReference: {fileID: 179490, guid: 8ea529a101b2e0c41b9526b11ca5de8d, type: 2}
-    - target: {fileID: 11480098, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}
-      propertyPath: smokeEffect.Array.data[2]
-      value: 
-      objectReference: {fileID: 183816, guid: 01da1104e1c56a44aa36dc754dbe1ef0, type: 2}
-    - target: {fileID: 11480098, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}
-      propertyPath: smokeRegenNum
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 11480098, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}
-      propertyPath: explosionEffectP1.Array.data[0]
-      value: 
-      objectReference: {fileID: 122334, guid: 4ea92c4b7b6d49a4dab6266a1b7a2332, type: 2}
-    - target: {fileID: 11480098, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}
-      propertyPath: explosionEffectP1.Array.data[1]
-      value: 
-      objectReference: {fileID: 199672, guid: 29afce1f2ca43944c8be4fc5a1b434eb, type: 2}
-    - target: {fileID: 11480098, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}
-      propertyPath: explosionEffectP1.Array.data[2]
-      value: 
-      objectReference: {fileID: 159188, guid: 9232d9c5a006b304698c713b0e9c55ca, type: 2}
-    - target: {fileID: 11480098, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}
-      propertyPath: explosionEffectP2.Array.data[0]
-      value: 
-      objectReference: {fileID: 155850, guid: bf604d7dca140cd4aaf1b3cae1872bdb, type: 2}
-    - target: {fileID: 11480098, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}
-      propertyPath: explosionEffectP2.Array.data[1]
-      value: 
-      objectReference: {fileID: 175566, guid: fe3d880c0a4d60c44963a3174ca4242c, type: 2}
-    - target: {fileID: 11480098, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}
-      propertyPath: explosionEffectP2.Array.data[2]
-      value: 
-      objectReference: {fileID: 150722, guid: a0ff49da8d04093488b5ea2b39ce53a3, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d03b07ca586aba0459e64ab54bfe5cef, type: 2}
   m_IsPrefabParent: 0

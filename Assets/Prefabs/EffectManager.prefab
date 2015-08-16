@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &107906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 450694}
+  m_Layer: 0
+  m_Name: SmokeParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &115200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 451252}
+  - 114: {fileID: 11480098}
+  m_Layer: 0
+  m_Name: EffectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &450694
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107906}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .217420936, y: -.362108231, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 451252}
+  m_RootOrder: 0
+--- !u!4 &451252
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115200}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 450694}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11480098
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711e0b49ae95c5e41a421117936c63a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionEffectP1:
+  - {fileID: 122334, guid: 4ea92c4b7b6d49a4dab6266a1b7a2332, type: 2}
+  - {fileID: 199672, guid: 29afce1f2ca43944c8be4fc5a1b434eb, type: 2}
+  - {fileID: 159188, guid: 9232d9c5a006b304698c713b0e9c55ca, type: 2}
+  explosionEffectP2:
+  - {fileID: 155850, guid: bf604d7dca140cd4aaf1b3cae1872bdb, type: 2}
+  - {fileID: 175566, guid: fe3d880c0a4d60c44963a3174ca4242c, type: 2}
+  - {fileID: 150722, guid: a0ff49da8d04093488b5ea2b39ce53a3, type: 2}
+  smokeEffect:
+  - {fileID: 157392, guid: 9b19bae0052bcee409cd5e2000af79cc, type: 2}
+  - {fileID: 179490, guid: 8ea529a101b2e0c41b9526b11ca5de8d, type: 2}
+  - {fileID: 183816, guid: 01da1104e1c56a44aa36dc754dbe1ef0, type: 2}
+  smokeParent: {fileID: 107906}
+  mainLogic: {fileID: 0}
+  bossX: 0
+  bossY: 1
+  radiusX: 2.5
+  radiusY: 1.60000002
+  smokeRegenNum: 35
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 115200}
+  m_IsPrefabParent: 1

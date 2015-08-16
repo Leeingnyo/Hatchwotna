@@ -23,6 +23,8 @@ public class MainLogic : MonoBehaviour {
 	public GameObject demon; //HP 게이지바의 고정된 부분
 	public GameObject demonAngry; //HP 게이지바의 고정된 부분
 	public GameObject demonDead; //HP 게이지바의 고정된 부분
+    public AudioSource backgroundMusic;
+    public AudioLowPassFilter filter;
 
 	int damageSum1; //1플레이어-전체 게임에서 누적된 피해량
 	int damage1; //1플레이어-이번 페이즈에 누적된 피해량
@@ -68,11 +70,12 @@ public class MainLogic : MonoBehaviour {
 		}
 		if (bossHp>=0) hpgreen.transform.localScale = new Vector3 ((float)(bossHp)/(float)(bossMaxHp), 1, 1); //HP 게이지바 크기 설정
 		else hpgreen.transform.localScale = new Vector3 (0, 1, 1); //HP 게이지바 크기 설정
-		dmgtext.text = "보스 남은체력 (프레임당 5씩 닳게 설정함)" + Convert.ToString (bossHp)+" 타이머 : "+Convert.ToString (timer);
 	}
 
 	void Ending(int hero){
 		//hero 값이 1이냐 2냐에 따라 엔딩 씬으로 넘어가기
+        Application.LoadLevel(1 + winner);
+        //Fade 추가해야함
 	}
 
 	public void DamageHp(int n, int atk){
@@ -168,6 +171,7 @@ public class MainLogic : MonoBehaviour {
 		countstate = 4;
 		timer=(float)(UnityEngine.Random.Range(timerMinRange, timerMaxRange))/100f; //다음 해치웠나? 타이머 시간 설정
 		hpgreen.GetComponent<SpriteRenderer>().color = new Color(0, 0.9f, 0); //체력바 초록색 설정
+        filter = GetComponent<AudioLowPassFilter>();
 	}
 	
 	// Update is called once per frame
@@ -208,6 +212,7 @@ public class MainLogic : MonoBehaviour {
 				if (damage1<damage2) countdown31.transform.position = new Vector3 (0, -3.5f, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
 				else countdown32.transform.position = new Vector3 (0, -3.5f, 0); //카운트 이미지 위치 설정 (지금은 화면 중앙)
 				countstate = 3;
+                filter.cutoffFrequency = 1250;
 			} 
 		}
 
@@ -246,6 +251,7 @@ public class MainLogic : MonoBehaviour {
 						ask1.transform.position = new Vector3 (-5000, -5000, 0); //해치웠나? 이미지 지우기 (안보이는곳으로 보냄)
 						ask2.transform.position = new Vector3 (-5000, -5000, 0); //해치웠나? 이미지 지우기 (안보이는곳으로 보냄)
 						hatchWotnaState = false; //공격 가능하게 품
+                        filter.cutoffFrequency = 22000;
 					}
 				}
 

@@ -68,7 +68,12 @@ public class MenuControl : MonoBehaviour {
     {
         buttonSet.SetActive(true);
         helpMessage.SetActive(false);
+        helpMsgs[helpPage].gameObject.SetActive(false);
+        helpMsgs[0].gameObject.SetActive(true);
+        helpPrev.gameObject.SetActive(false);
+        helpNext.gameObject.SetActive(true);
         helpPage = 0;
+        PageNotationUpdate();
     }
 
     void PageNotationUpdate()

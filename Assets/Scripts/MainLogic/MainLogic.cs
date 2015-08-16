@@ -10,6 +10,8 @@ public class MainLogic : MonoBehaviour {
 	public GameObject[] number2=new GameObject[10];
 
 	public Text dmgtext;
+	public Text dmgMeter1;
+	public Text dmgMeter2;
 	public GameObject countdown31; //3 2 1 세는 카운트 이미지
 	public GameObject countdown21; //3 2 1 세는 카운트 이미지
 	public GameObject countdown11; //3 2 1 세는 카운트 이미지
@@ -81,6 +83,8 @@ public class MainLogic : MonoBehaviour {
 	public void DamageHp(int n, int atk){
 		lastAttack = atk; //마지막으로 공격한 플레이어 설정
 		fakeDmg=UnityEngine.Random.Range(n*1000+100, n*1000+1000); //다음 해치웠나? 타이머 시간 설정
+		if (atk == 1) fakeDmgSum1 = fakeDmgSum1 + fakeDmg;
+		else fakeDmgSum2 = fakeDmgSum2 + fakeDmg;
         FindObjectOfType<EffectManager>().FakeDamageEffect(fakeDmg, atk);
         /*
 		dmgx = 0.8f;
@@ -119,6 +123,8 @@ public class MainLogic : MonoBehaviour {
 		bossHp = bossHp - n; //보스 HP 감소
 		BossHpUpdate(); //보스 HP띄우는 UI 갱신
 		if (bossHp < 0) { //보스 체력이 0이 되어 강제종료
+			dmgMeter1.text="누적 피해량 : "+Convert.ToString(fakeDmgSum1);
+			dmgMeter2.text="누적 피해량 : "+Convert.ToString(fakeDmgSum2);
 			countdown11.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
 			countdown12.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
 			countdown21.transform.position = new Vector3 (-5000, -5000, 0); //카운트 이미지 지우기 (안보이는곳으로 보냄)
@@ -129,7 +135,7 @@ public class MainLogic : MonoBehaviour {
 			demonDead.transform.position = new Vector3 (-0.2f, 0.2f, 0); //악마 이미지 위치 설정
 			FindObjectOfType<EffectManager> ().HideSmokes();
 			hatchWotnaState = true; //공격 못하게 막음
-			hatchWotnaTimer=3f;
+			hatchWotnaTimer=7f;
 			//System.Threading.Thread.Sleep(3000); //3초 대기
 		}
 	}
@@ -160,13 +166,15 @@ public class MainLogic : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		fakeDmgSum1 = 0;
+		fakeDmgSum2 = 0;
 		demon.transform.position = new Vector3 (0, 0.6f, 0); //악마 이미지 위치 설정
 		timerSum = 0; //누적 타이머 초기화
 		damageSum1 = 0; //누적 피해 초기화1
 		damage1 = 0; //현재 피해 초기화1
 		damageSum2 = 0; //누적 피해 초기화2
 		damage2 = 0; //현재 피해 초기화2
-		bossMaxHp = 1200; //보스 최대 체력 초기화
+		bossMaxHp = 1000; //보스 최대 체력 초기화
 		bossHp = bossMaxHp; //보스 현재 체력 초기화
 		countstate = 4;
 		timer=(float)(UnityEngine.Random.Range(timerMinRange, timerMaxRange))/100f; //다음 해치웠나? 타이머 시간 설정
@@ -220,12 +228,14 @@ public class MainLogic : MonoBehaviour {
 			if (hatchWotnaTimer>0) hatchWotnaTimer=hatchWotnaTimer-Time.deltaTime;
 			else if (hatchWotnaTimer<=0){
 				if (bossHp < 0) { //보스 체력이 0이 되어 강제종료
-					if (damageSum1 < damageSum2) { //2플레이어가 누적 딜 높음
+					if (fakeDmgSum1 < fakeDmgSum2) { //2플레이어가 누적 딜 높음
 						winner=1; //1플레이어 승리
 					} 
 					else { //1플레이어가 누적 딜 높음
 						winner=2; //2플레이어 승리
 					}
+					dmgMeter1.text=null;
+					dmgMeter2.text=null;
 					Ending(winner); //엔딩 호출
 				}
 				else{
